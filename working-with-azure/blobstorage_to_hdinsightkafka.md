@@ -71,7 +71,7 @@ In the Select Destination to connect dropdown, select `Kafka Producer` with the 
 
 ![image alt text](img/BlobToKafka/Kafka_DataFormat.png)
 
-Now your pipeline is fully configured and ready for action! Hit the validate button to check the connections. If successful, hit the preview button ![image alt text](img/BlobToKafka/PreviewIcon.png) to check that you can read records from the Blob Store file. Click the Hadoop FS stage and you should see ten records listed in the preview panel. You can click into them to see the individual fields and their values:
+Now your pipeline is fully configured and ready for action! Hit the validate button ![image alt text](img/BlobToKafka/ValidateIcon.png) to check the connections. If successful, hit the preview button ![image alt text](img/BlobToKafka/PreviewIcon.png) to check that you can read records from the Blob Store file. Click the Hadoop FS stage and you should see ten records listed in the preview panel. You can click into them to see the individual fields and their values:
 
 ![image alt text](img/BlobToKafka/Preview.png)
 
