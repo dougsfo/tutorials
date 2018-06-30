@@ -52,8 +52,6 @@ Select Origin from the Drop down list: `Hadoop FS Standalone`
 
 ![image alt text](img/BlobToKafka/HadoopFS_DataFormat.png)
 
-Configure the pipeline's **Error Records** property according to your preference. Since this is a tutorial, you could discard error records, but in a production system you would write them to a file or queue for analysis later.
-
 Now, let’s send this data to Kafka.
 In the Select Destination to connect dropdown, select `Kafka Producer` with the associated HDP version of the HDInsight Kafka cluster. Configure Kafka as follows:
 
@@ -70,6 +68,8 @@ In the Select Destination to connect dropdown, select `Kafka Producer` with the 
 * **Data Format**: `JSON`
 
 ![image alt text](img/BlobToKafka/Kafka_DataFormat.png)
+
+Configure the pipeline's **Error Records** property according to your preference. Since this is a tutorial, you could discard error records, but in a production system you would write them to a file or queue for analysis later.
 
 Now your pipeline is fully configured and ready for action! Hit the validate button ![image alt text](img/BlobToKafka/ValidateIcon.png) to check the connections. If successful, hit the preview button ![image alt text](img/BlobToKafka/PreviewIcon.png) to check that you can read records from the Blob Store file. Click the Hadoop FS stage and you should see ten records listed in the preview panel. You can click into them to see the individual fields and their values:
 
