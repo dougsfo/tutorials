@@ -16,44 +16,74 @@ You can download sample data for this tutorial from the following location: http
 
 When working with HDInsight Kafka, we need to pre-create the Kafka topic. Ssh into the terminal for StreamSets Data Collector on HDInsight and run the following command to create a Kafka topic. Remember to replace the zookeeper_url with your own uri for zookeeper.
 
-	sshuser@ed10-adlsst:~$ /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --replication-factor 3 --partitions 8 --topic taxi_sdc --zookeeper <zookeeper_uri>
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --replication-factor 3 --partitions 3 --topic nyctaxi --zookeeper <zookeeper_uri>
 
 ## Creating a Pipeline
 
-Now let's get some data flowing! In your browser, login to SDC and create a new pipeline.
+Now let's get some data flowing! In your browser, login to StreamSets Data Collector (SDC) and create a new pipeline.
 
-Select Origin from the Drop down list: Hadoop FS Standalone
+Select Origin from the Drop down list: `Hadoop FS Standalone`
 ![image alt text](img/BlobToKafka/SelectSource_Hadoop.png)
 **Hadoop FS tab**
 
 * **Hadoop FS URI**: this has the form `wasb[s]://<BlobStorageContainerName>@<StorageAccountName>.blob.core.windows.net/<path>`
 
 * **Hadoop FS Configuration**
-	* **fs.azure.account.key.pranavkyo.blob.core.windows.net** = "<your storage account key>"
-	* **fs.azure.account.keyprovider.pranavkyo.blob.core.windows.net** = org.apache.hadoop.fs.azure.SimpleKeyProvider
+	* **fs.azure.account.key.pranavkyo.blob.core.windows.net** = `<your storage account key>`
+	* **fs.azure.account.keyprovider.pranavkyo.blob.core.windows.net** = `org.apache.hadoop.fs.azure.SimpleKeyProvider`
 
 ![image alt text](img/BlobToKafka/HadoopFS_HadoopFS.png)
 
 **Files**
 
-* **Files Directory**: <Blob Storage path for the sample file>
+* **Files Directory**: `<Blob Storage path for the sample file>`
 
-* **File Name Pattern**: *
+* **File Name Pattern**: `*`
 
-* **Read Order**: Last Modified Timestamp
+* **Read Order**: `Last Modified Timestamp`
 
 ![image alt text](img/BlobToKafka/HadoopFS_Files.png)
 
 **Data Format tab**
 
-* **Data Format**: Delimited
+* **Data Format**: `Delimited`
 
-* **Header Line**: With Header Line
+* **Header Line**: `With Header Line`
 
 ![image alt text](img/BlobToKafka/HadoopFS_DataFormat.png)
 
-Configure the pipeline's **Error Records** property according to your preference. Since this is a tutorial, you could discard error records, but in a production system you would write them to a file or queue for later analysis.
+Configure the pipeline's **Error Records** property according to your preference. Since this is a tutorial, you could discard error records, but in a production system you would write them to a file or queue for analysis later.
 
-Now hit the preview button to check that you can read records from the file. Click the Hadoop FS stage and you should see ten records listed in the preview panel. You can click into them to see the individual fields and their values:
+Now, let’s send this data to Kafka.
+In the Select Destination to connect dropdown, select `Kafka Producer` with the associated HDP version of the HDInsight Kafka cluster. Configure Kafka as follows:
+
+**Kafka tab**
+
+* **Broker URI**: `<Your HDInsight Kafka Broker URI>`
+
+* **Topic**: `nyctaxi`
+
+![image alt text](img/BlobToKafka/Kafka_Kafka.png)
+
+**Kafka Data Format tab**
+
+* **Data Format**: `JSON`
+
+![image alt text](img/BlobToKafka/Kafka_DataFormat.png)
+
+Now your pipeline is fully configured and ready for action! Hit the validate button to check the connections. If successful, hit the preview button ![image alt text](img/BlobToKafka/PreviewIcon.png) to check that you can read records from the Blob Store file. Click the Hadoop FS stage and you should see ten records listed in the preview panel. You can click into them to see the individual fields and their values:
 
 ![image alt text](img/BlobToKafka/Preview.png)
+
+If your pipeline reports an error at validation or preview, check your configuration properties. If it’s still not working, contact us via the [sdc-user Google Group](https://groups.google.com/a/streamsets.com/forum/#!forum/sdc-user) or the [StreamSets Community Slack channel](https://streamsetters-slack.herokuapp.com/) - details are on the [StreamSets Community Page](https://streamsets.com/community/).
+
+## Running the Pipeline
+
+If all is well, it’s time to run the pipeline! Hit the run button ![image alt text](img/BlobToKafka/PlayIcon.png) and you should see 5386 input records and 5386 output records in the monitoring panel.
+
+You Kafka tools provided by Azure to verify data was written to the topic. details can be found here: [Manage Kafka Topics](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-get-started#manage-kafka-topics)
+
+## Conclusion
+
+This tutorial shows how simple it is to stream data from any file on Blob Storage, structured on unstructured into a Kafka topic that can feed multiple consumers downstream. 
+Follow the next tutorial to see how you can use StreamSets to read data from the topic and feed SQL Datawarehouse on Azure.
