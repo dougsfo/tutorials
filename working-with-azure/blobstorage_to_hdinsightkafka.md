@@ -83,9 +83,9 @@ If all is well, it’s time to run the pipeline! Hit the run button ![image alt 
 
 ![image alt text](img/BlobToKafka/StartandMonitor.png)
 
-Use Kafka tools provided by Azure to verify data was written to the topic. details can be found here: [Manage Kafka Topics](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-get-started#manage-kafka-topics)
+Use Kafka tools provided by Azure to verify data was written to the topic. More details can be found here: [Manage Kafka Topics](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-get-started#manage-kafka-topics)
 
 ## Conclusion
 
-This tutorial shows how simple it is to stream data from any file on Blob Storage, structured on unstructured into a Kafka topic that can feed multiple consumers downstream. 
-Follow the next tutorial to see how you can use StreamSets to read data from the topic and feed SQL Datawarehouse on Azure.
+This tutorial shows how simple it is to stream data from any Directory on Blob Storage, structured on unstructured, into a Kafka topic that can feed multiple consumers downstream. 
+Follow the next tutorial to see how you can use StreamSets Data Collector to read data from the topic and feed it into a SQL Datawarehouse on Azure.
