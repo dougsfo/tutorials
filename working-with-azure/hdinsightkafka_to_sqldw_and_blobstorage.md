@@ -1,4 +1,4 @@
-# Ingesting Data from HDInsight Kafka into SQL Datawarehouse and Hive backed by Blob Sotrage
+# Ingesting Data from HDInsight Kafka into Azure SQL Datawarehouse and Hive backed by Blob Storage
 
 [Kafka](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-introduction) is an open-source, distributed streaming platform. It's often used as a message broker, as it provides functionality similar to a publish-subscribe message queue. [HDInsight Kafka](https://azure.microsoft.com/en-us/services/hdinsight/apache-kafka/) is a managed service that provides a simplified configuration for Apache Kafka.
 
