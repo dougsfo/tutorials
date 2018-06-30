@@ -81,7 +81,9 @@ If your pipeline reports an error at validation or preview, check your configura
 
 If all is well, it’s time to run the pipeline! Hit the run button ![image alt text](img/BlobToKafka/PlayIcon.png) and you should see 5386 input records and 5386 output records in the monitoring panel.
 
-You Kafka tools provided by Azure to verify data was written to the topic. details can be found here: [Manage Kafka Topics](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-get-started#manage-kafka-topics)
+![image alt text](img/BlobToKafka/StartandMonitor.png)
+
+Use Kafka tools provided by Azure to verify data was written to the topic. details can be found here: [Manage Kafka Topics](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-get-started#manage-kafka-topics)
 
 ## Conclusion
 
