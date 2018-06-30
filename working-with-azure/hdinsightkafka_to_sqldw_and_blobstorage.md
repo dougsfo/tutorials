@@ -60,12 +60,7 @@ From the Select Origin dropdown list, select Kafka Multitopic Consumer with the 
 
 * **Data Format**: `JSON`
 
-![image alt text](img/KafkaToSqlDWandHive/KafkaDataFormat.png)
-
-Under the Select Processor list, select an Expression Evaluator and add the following expression:
-* **\/date**: = `${record:value(‘/timestamp)}`
-
-![image alt text](img/KafkaToSqlDWandHive/ExpressionEvaluator.png)
+![image alt text](img/KafkaToSqlDWandHive/KafkaDataFormatJson.png)
 
 Add a Field Convertor to convert incoming data from String to applicable formats matching the target table.
 
@@ -73,7 +68,7 @@ Add a Field Convertor to convert incoming data from String to applicable formats
 
 Select JDBC Producer from the Destination list and configure the JDBC URL, schema and table name:
 
-**KaJDBC - JDBC tab tab**
+**JDBC - JDBC tab**
 
 * **JDBC Connection String**: `<Your JDBC Connection String to the SQL DW>`
 
@@ -95,7 +90,7 @@ Now that the pipeline is ready to read from a Kafka topic and send to SQL Datwar
 
 Continue configuring the pipeline to write this data into a Hive table as well.
 
-## Writing to Hive
+### Writing to Hive
 
 Add a Hive Metadata processor and on the General tab, set the Stage Library to the respective version. This processor analyzes the structure of incoming data, comparing it to the Hive Metastore schema and creates metadata records capturing the changes that are required in the Hive table structure. Link the input to the Field Type Convertor's Output and configure it thus:
 
@@ -124,8 +119,6 @@ Add a Hive Metadata processor and on the General tab, set the Stage Library to t
 **Data Format tab**:
 
 * **Data Format**: `Avro`
-
-### Working with Hive Metadata
 
 The Hive Metadata processor emits data records on its #1 output stream, and metadata on #2. 
 
